@@ -110,7 +110,7 @@ export default function HomePage({accounts}){
 }
 
 export const getServerSideProps = async (ctx) =>{
-  const res = await fetch('http://localhost:3000/api/account')
+  const res = await fetch('http://localhost:8080/api/account')
   const accounts = await res.json()
 
   return {

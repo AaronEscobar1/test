@@ -33,7 +33,7 @@ export default function (props){
 export const getServerSideProps = async (ctx) =>{
   const id = ctx.params.id
 
-  const res = await fetch(`http://localhost:3000/api/account/${id}`)
+  const res = await fetch(`http://localhost:8080/api/account/${id}`)
 
   const data = await res.json()
 
