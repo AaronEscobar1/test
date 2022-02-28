@@ -14,7 +14,13 @@ export default async (req, res) => {
                 if (!account) return res.status(404).json({mgs: "the account not fount"});
                 return res.status(200).json(account);   
             } catch (error) {
-                return res.status(500).json({error: error.message});
+                try {
+                    const account = await Account.findOne({ name: id});
+                    if (!account) return res.status(404).json({mgs: "the account not fount",  redirect: { destination: '/404', permanent: false }});
+                    return res.status(200).json(account);   
+                } catch (error) {
+                    return res.status(404).json({mgs: "the account not fount"});
+                }
             }
         case 'PUT':
             try {

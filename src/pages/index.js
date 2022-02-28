@@ -1,10 +1,13 @@
 import 'semantic-ui-css/semantic.min.css'
+import { useState, useEffect } from 'react'
+import Router from 'next/router';
 import Image from 'next/image'
 import { Button, Card, Form, Grid, Segment } from 'semantic-ui-react'
-import { useState, useEffect } from 'react'
 import axios from 'axios';
+import Link from 'next/link';
 
 export default function HomePage({accounts}){
+
   const [state, setState] = useState(accounts)
   const [input, handleInput] = useState({ name: ''})
   const [send, handleSend] = useState(false)
@@ -83,10 +86,12 @@ export default function HomePage({accounts}){
           {
             state.map(account => (
               <Card as='a' key={account._id}>
-                <Card.Content>
-                  <Image width={'50px'} height={'50px'} src='/../public/af.jpg' alt='Logo'/>
-                  <Card.Header>{account.name}</Card.Header>
-                </Card.Content>
+                <Link href={`/${account.name}`}>
+                  <Card.Content>
+                    <Image width={'50px'} height={'50px'} src='/../public/af.jpg' alt='Logo'/>
+                    <Card.Header>{account.name}</Card.Header>
+                  </Card.Content>
+                </Link>
                 <Card.Content extra>
                   <div className='ui one buttons'>
                     <Button basic color='red' onClick={e => deleteAccount(account._id)}>
